@@ -1,0 +1,16 @@
+class Solution:
+    def reverse(self, x: int) -> int:
+        if not x:
+            return x
+        s=list(str(abs(x)))
+        def helper(left, right):
+            if left< right:
+                s[left], s[right] = s[right], s[left]
+                helper(left+1, right-1)
+        
+        helper(0, len(s) -1)
+        res = int(''.join(s)) * x//abs(x)
+        p = pow(2,31) 
+        if abs(res) > p:
+            res = 0
+        return res
