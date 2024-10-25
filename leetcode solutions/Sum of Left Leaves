@@ -1,0 +1,18 @@
+class Solution:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        ans =0
+        def dfs(node, side):
+            nonlocal ans
+            if not node.right and not node.left:
+                if side == 0:
+                    ans += node.val
+            else:
+                if node.left:
+                    dfs(node.left, 0)
+                if node.right:
+                    dfs(node.right, 1)
+        if root.left:
+            dfs(root.left, 0)
+        if root.right:
+            dfs(root.right, 1)
+        return ans
