@@ -1,0 +1,16 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        if 0 <= r < NROWS and 0 <= c < NCOLS and (r,c) not in seen and board[r][c] == word[idx]:
+            if idx == N-1:
+                return True
+            seen.add((r,c))
+            for dr,dc in DIRS:
+                if search(r+dr, c+dc, seen, idx+1):
+                    return True
+            seen.remove((r,c))
+
+        for r in range(NROWS):
+            for c in range(NCOLS):
+                if search(r,c,set(), 0):
+                    return True
+        return False
