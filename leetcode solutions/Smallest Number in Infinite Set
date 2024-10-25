@@ -1,0 +1,22 @@
+class SmallestInfiniteSet:
+
+    def __init__(self):
+        self.missed = set()
+        
+
+    def popSmallest(self) -> int:
+        
+        res = 1
+        while res in self.missed:
+            res +=1
+        self.missed.add(res)
+        return res
+
+        
+
+    def addBack(self, num: int) -> None:
+        if num in self.missed:
+            self.missed.remove(num)
+        
+
+
