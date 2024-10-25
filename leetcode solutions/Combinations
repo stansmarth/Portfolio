@@ -1,0 +1,12 @@
+class Solution:
+    def recur(self, s, n, k):
+        if k ==1:
+            return [[i] for i in range(s, n+1)]
+        res = []
+        for i in range(s, n-k+2):
+            for combo in self.recur(i + 1, n, k - 1):
+               res.append([i]+ combo)
+        return res
+
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        return self.recur(1, n, k)
