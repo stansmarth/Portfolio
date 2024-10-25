@@ -1,0 +1,16 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        d=defaultdict(list)
+        n= len(nums)
+        for i in range(n):
+            d[nums[i]].append(i)
+        for k,v in d.items():
+            if target-k in d:
+                if target-k == k and len(v)==1:
+                    continue
+                a0 = v[0]
+                a1 = d[target-k][0]
+                if target-k == k:
+                    if len(v)>1:
+                        a1 = v[1]
+                return [a0, a1]
