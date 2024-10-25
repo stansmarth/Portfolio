@@ -1,0 +1,15 @@
+class Solution:
+    def maxPower(self, s: str) -> int:
+        ans = 0
+        ss = ''
+        for c in s:
+            if not ss:
+                ss += c
+            else:
+                if c != ss[0]:
+                    ans = max(ans, len(ss))
+                    ss = c
+                else:
+                    ss+=c
+        ans = max(ans, len(ss))
+        return ans
