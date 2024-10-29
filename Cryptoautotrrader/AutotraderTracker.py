@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 from rich.console import Console
 from rich.table import Table
 
-from coinprice.api import binance, coinbase, bitfinex, kucoin, gateio, kraken, huobi, okx
+from coinprice.api import binance
 from coinprice.app.utils import clear_console, terminal_title
 
 console = Console()
@@ -40,12 +40,6 @@ def track_prices(args):
 
 
 
-    # Filter exchanges
-    exchanges = {name: func for name, func in all_exchanges.items() if getattr(args, name.lower(), False)}
-
-    # Use all available exchanges if none are selected
-    if not exchanges:
-        exchanges = all_exchanges
 
     try:
         while True:
@@ -68,14 +62,12 @@ def track_prices(args):
             console.print(table)
             last_updated_time = datetime.now().strftime('%H:%M:%S')
 
-            # Display the initial Last Updated line
             countdown = interval
             while countdown > 0:
                 console.print(f"Last Updated at {last_updated_time} | {countdown}s", end="\r")
                 time.sleep(1)
                 countdown -= 1
 
-            # Print new line after countdown finishes
             console.print(f"Last Updated at {last_updated_time} | Updating...")
 
     except KeyboardInterrupt:
